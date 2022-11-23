@@ -1,0 +1,31 @@
+{
+  "name": "cli-temp-builder",
+  "version": "1.0.0",
+  "description": "Cli tool for generating template",
+  "main": "index.js",
+  "bin": {
+    "tg": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Grekoff18/CliTempBuilder.git"
+  },
+  "keywords": [
+    "cli",
+    "cli-tool",
+    "template-builder"
+  ],
+  "author": "Nick Grekoff <kolagrekalo@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Grekoff18/CliTempBuilder/issues"
+  },
+  "homepage": "https://github.com/Grekoff18/CliTempBuilder#readme",
+  "dependencies": {
+    "fs-extra": "^10.1.0",
+    "prompts": "^2.4.2"
+  }
+}
