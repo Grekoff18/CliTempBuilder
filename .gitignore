@@ -1,0 +1,10 @@
+/node_modules/
+/build/
+/lib/
+/docs/
+.idea/*
+
+.DS_Store
+coverage
+package-lock.json
+*.log
