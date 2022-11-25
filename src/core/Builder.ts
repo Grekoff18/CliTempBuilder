@@ -2,6 +2,8 @@ const clear = require("clear");
 const chalk = require("chalk");
 const figlet = require("figlet");
 const { WelcomeMessage } = require("../enums/CLIMessages");
+const pkg = require("../../package.json");
+const program = require("commander");
 
 class Builder {
   public response: any = {};

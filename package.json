@@ -12,12 +12,12 @@
     "audit:npm-check-updates": "npx npm-check-updates --errorLevel 1",
     "build": "tsc -p .",
     "create": "npm run build && npm run test",
-    "local": "sudo npm uninstall -g && sudo npm install -g && pizza",
+    "local": "sudo npm uninstall -g && sudo npm install -g && generate",
     "npm:format": "npx prettier-package-json --write package.json",
     "npm:upgrade": "npx npm-check-updates -iu",
     "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",
     "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
-    "test": "sudo npm i -g && pizza"
+    "test": "sudo npm i -g && generate"
   },
   "repository": {
     "type": "git",

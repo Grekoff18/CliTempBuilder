@@ -36,14 +36,14 @@ class TemplateEngine {
     const sortedTemplates = templatesArray.map((t: string) => {
       const getJsonByName = (name: string) =>
         `${this.pathToTemplates}/${t}/${name}.json`;
+      let result = this.getTemplateByPath(getJsonByName("template"));
 
-      if (this.getTemplateByPath(getJsonByName("template"))) {
-        const result = this.getTemplateByPath(getJsonByName("template"));
-        result.dir = getJsonByName("template");
-        return result;
+      if (typeof result === "undefined") {
+        result = this.getTemplateByPath(getJsonByName("package"));
       }
 
-      return this.getTemplateByPath(getJsonByName("package"));
+      result.dir = `${this.pathToTemplates}/${t}`;
+      return result;
     });
 
     this.templates = sortedTemplates;

@@ -2,7 +2,11 @@ const { stopPrompting } = require("../enums/Warnings");
 const prompts = require("prompts");
 const fS = require("fs-extra");
 const { questions: Q, override: O } = require("../constants/prompts");
-const { isFileExist: iFE, copyTemplate: cT } = require("../utils/index");
+const {
+  isFileExist: iFE,
+  copyTemplate: cT,
+  getPathForNewProject: gPFNP,
+} = require("../utils/index");
 
 class Listener {
   // User response
@@ -21,7 +25,7 @@ class Listener {
   async listenPrompts(): Promise<void> {
     this.response = await prompts(Q, { onCancel: this.onCancel });
     this.responseSetTemplate();
-    await this.checkIfProjectExist();
+    this.checkIfProjectExist();
   }
 
   responseSetTemplate() {
@@ -32,20 +36,22 @@ class Listener {
 
   async checkIfProjectExist() {
     // Check if the project already exist
-    if (await iFE(this.response.name)) {
+
+    gPFNP(this.response.name);
+    if (await iFE(gPFNP(this.response.name))) {
       // Ask if we should override
       const overwrite = await prompts(O);
 
       // Override the project if the user said yes
       if (overwrite.value) {
         // Remove old files
-        await fS.remove(this.response.name);
+        await fS.remove(gPFNP(this.response.name));
         // Copy the template
-        cT(this.response.name, this.response.template);
+        cT(gPFNP(this.response.name), this.response.template);
       }
     } else {
       // Copy the template
-      cT(this.response.name, this.response.template);
+      cT(gPFNP(this.response.name), this.response.template);
     }
   }
 

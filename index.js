@@ -7,27 +7,28 @@ const fs = require("fs-extra");
 
 /**
  * Check if file with given name is already exist
- * @param {String} fileName 
+ * @param {String} fileName
  * @returns {Boolean}
  */
 async function isFileExist(fileName) {
-  return !!(await fs.promises.stat(fileName).catch(() => null))
+  return !!(await fs.promises.stat(fileName).catch(() => null));
 }
 
 /**
  * Copy the template
- * @param {String} name 
- * @param {any} template 
+ * @param {String} name
+ * @param {any} template
  * @returns {Boolean}
  */
 async function copyTemplate(name, template) {
   // Copy all of the files except the template.json file
+  console.log(template, name);
   await fs.copy(template, name, {
     filter: (src) => {
       if (src.includes("template.json")) return false;
       return true;
-    }
-  })
+    },
+  });
 }
 
 (async () => {
@@ -86,17 +87,18 @@ async function copyTemplate(name, template) {
 
   // If there is only one template then set the first template to be the
   // template on the response
-  if (typeof response.template === 'undefined') {
-    response.template = templates[0].dir
+  if (typeof response.template === "undefined") {
+    response.template = templates[0].dir;
   }
 
   // Check if the project already exist
   if (await isFileExist(response.name)) {
     // Ask if we should override
     const overwrite = await prompts({
-      type: 'confirm',
-      name: 'value',
-      message: 'You already have a project with that name. Do you want to overwrite it ?',
+      type: "confirm",
+      name: "value",
+      message:
+        "You already have a project with that name. Do you want to overwrite it ?",
       initial: false,
     });
 
